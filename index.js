@@ -46,6 +46,17 @@ app.put('/updateEmployee/:id', (req, res) => {
     res.status(200).send(emp);
 });
 
+//DELETE request to delete employee by id
+app.delete('/deleteEmployee/:id', (req, res) => {
+    console.log("Deleted");
+    const index = employees.findIndex(e => e.id === parseInt(req.params.id));
+    if (index === -1) {
+        return res.status(400).send("Employee not found");
+    }
+    employees.splice(index, 1);
+    return res.send('Deleted');
+});
+
 app.listen(port, () => {
     console.log(`Server is running on: ${port}...`);
 });
