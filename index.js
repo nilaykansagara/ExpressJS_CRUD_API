@@ -8,6 +8,7 @@ const port = 3000;
 var employees = [];
 var eid = 1;
 
+//POST request to add employee
 app.post('/addEmployee', (req, res) => {
 
     const { name, role, salary } = req.body
@@ -17,8 +18,18 @@ app.post('/addEmployee', (req, res) => {
 
 });
 
+//GET request to get all employees data
 app.get('/getEmployees', (req, res) => {
     res.send(employees);
+});
+
+//GET request to get a employee by id
+app.get('/getEmployee/:id', (req, res) => {
+    const emp = employees.find(e => e.id === parseInt(req.params.id));
+    if (!emp) {
+        return res.status(400).send("Employee not found");
+    }
+    res.status(200).send(emp);
 });
 
 app.listen(port, () => {
