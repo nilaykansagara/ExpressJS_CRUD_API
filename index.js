@@ -17,6 +17,10 @@ app.post('/addEmployee', (req, res) => {
 
 });
 
+app.get('/getEmployees', (req, res) => {
+    res.send(employees);
+});
+
 app.listen(port, () => {
     console.log(`Server is running on: ${port}...`);
 });
