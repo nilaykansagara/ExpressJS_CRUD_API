@@ -32,6 +32,20 @@ app.get('/getEmployee/:id', (req, res) => {
     res.status(200).send(emp);
 });
 
+//PUT request to update employee by id
+app.put('/updateEmployee/:id', (req, res) => {
+    const emp = employees.find(e => e.id === parseInt(req.params.id));
+    if (!emp) {
+        return res.status(400).send("Employee not found");
+    }
+    const { name, role, salary } = req.body
+    emp.name = name;
+    emp.role = role;
+    emp.salary = salary;
+
+    res.status(200).send(emp);
+});
+
 app.listen(port, () => {
     console.log(`Server is running on: ${port}...`);
 });
